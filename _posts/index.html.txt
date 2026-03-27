@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supply Chain Thematic Team - Request Form</title>
+</head>
+<body>
+    <h1>Supply Chain Thematic Team - Request Form</h1>
+    <p>Please use this form to submit requests to the Supply Chain Thematic team.</p>
+
+    <form id="requestForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" required><br><br>
+
+        <label for="type">Request Type:</label><br>
+        <select id="type" required>
+            <option value="">-- Please select --</option>
+            <option value="Data Request">Data Request</option>
+            <option value="Analysis Support">Analysis Support</option>
+            <option value="Supply Chain Query">Supply Chain Query</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" rows="5" cols="40" required></textarea><br><br>
+
+        <button type="submit">Submit Request</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("requestForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                type: document.getElementById("type").value,
+                description: document.getElementById("description").value
+            };
+
+            // TODO: replace this with your real API Gateway URL in Step 3
+            const apiUrl = "YOUR_API_GATEWAY_URL_HERE";
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    document.getElementById("message").innerText = "Request submitted successfully.";
+                    document.getElementById("requestForm").reset();
+                } else {
+                    document.getElementById("message").innerText = "Something went wrong submitting your request.";
+                }
+            } catch (error) {
+                document.getElementById("message").innerText = "Unable to reach the request service.";
+            }
+        });
+    </script>
+</body>
+</html>
