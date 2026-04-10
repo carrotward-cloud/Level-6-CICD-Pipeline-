@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Hello, World"
+title: "Hello, World Today"
 date: 2024-01-01
 ---
 
